@@ -1,0 +1,587 @@
+<style>
+.dropbtn {
+    background-color: rgb(141, 141, 141);
+    color: white;
+    width: 150px;
+    height: 30px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* .dropbtn:hover, .dropbtn:focus {
+    background-color: rgb(141, 141, 141);
+} */
+
+button:hover {
+    opacity: 0.8;
+    fill-opacity: 0.8;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #a8a8a8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    min-width: 160px;
+    max-height: 250px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content button:hover {
+    background-color: rgb(201, 201, 201);
+    /* fill-opacity: 0.8; */
+}
+
+.dropdown-content button {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display:block;
+
+    border: none;
+    cursor: pointer;
+    min-width: 160px;
+    padding: 12px 16px;
+    overflow: auto;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+    z-index: 1;
+}
+
+.PriceCalculator {
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+  display: block;
+}
+
+.InputHeader {
+  display: block;
+  /* padding: 12px 16px; */
+  min-height: 30px;
+}
+
+.VerticalBlock {
+  display: block;
+}
+
+.InputSection {
+  display: inline-block;
+  padding: 15px 15px;
+  width: 250px;
+  text-align: center;
+}
+
+.Output {
+  font-size:200%;
+}
+
+.OutputArea {
+  display: inline-block;
+  border-style:inset;
+  border-color: gray;
+  background-color:gray;
+  border-width:thick;
+  
+  width: 150px;
+  height: 30px;
+}
+
+.OutputLabel {
+  display: inline-block;
+  font-size:200%;
+  padding: 30px 5px;
+  height: 100px;
+  text-align:center;
+}
+
+/* .InputSection text {
+  padding: 10px 30px;
+} */
+/* 
+.dropdown a:hover {background-color: #f1f1f1} */
+
+.show {display:block;}
+</style>
+
+<!-- <form action="/action_page.php"> -->
+<div class="PriceCalculator" id = "Price Calculator">
+  <div class="VerticalBlock">
+    <div class="InputSection">
+      <div class="InputHeader">
+        <label>Select a Pickup City</label>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn" id="dropdown1">Select</button>
+        <div id="dropdowncontent1" class="dropdown-content">
+          <button tabIndex=0 class="CityElement">Select</button>
+          
+
+        </div>
+      </div>
+    </div>
+    <!-- <label>Or</label>
+    <div class="InputSection">
+      <div class="InputHeader">
+        <label>Enter a Zipcode</label>
+      </div>
+      <input type="text" placeholder="Zipcode" name="uname" id="zipcode1" oninput="UpdateCityFromZipCode(this, 'dropdown1')" required>
+      <label id="zipcode1label"></label>
+    </div> -->
+  </div>
+  <div class="VerticalBlock">
+    <div class="InputSection">
+      <div class="InputHeader">
+        <label>Select a Delivery City</label>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn" id="dropdown2">Select</button>
+        <div id="dropdowncontent2" class="dropdown-content">
+          <button tabIndex=0 class="CityElement">Select</button>
+          
+          
+        </div>
+      </div>
+    </div>
+    <!-- <label>Or</label>
+    <div class="InputSection">
+      <div class="InputHeader">
+        <label>Enter a Zipcode</label>
+      </div>
+      <input type="text" placeholder="Zipcode" name="uname" id="zipcode2" oninput="UpdateCityFromZipCode(this, 'dropdown2')" required>
+      <label id="zipcode2label"></label>
+    </div> -->
+  </div>
+  <div class="VerticalBlock">
+    <div>
+      <div class="VerticalBlock">
+        <div class="InputSection">
+          <div class="InputHeader">
+            <label>Select a Delivery Type</label>
+          </div>
+          <div class="dropdown">
+            <button class="dropbtn" id="dropdown3">Select</button>
+            <div id="dropdowncontent3" class="dropdown-content">
+              <button tabIndex=0 class="DeliveryElement">Select</button>
+              <button tabIndex=1 class="DeliveryElement">Same Day</button>
+              <button tabIndex=2 class="DeliveryElement">3 Hour</button>
+              <button tabIndex=3 class="DeliveryElement">Direct</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="VerticalBlock"> -->
+      <div class="InputSection">
+        <div class="InputHeader">
+          <label>Select a Number of Pallets</label>
+            </div>
+          <div class="dropdown">
+          <button class="dropbtn" id="dropdown4">Select</button>
+          <div id="dropdowncontent4" class="dropdown-content">
+            <button tabIndex=0 class="PalletElement">Select</button>
+            <button tabIndex=1 class="PalletElement">1</button>
+            <button tabIndex=2 class="PalletElement">2</button>
+            <button tabIndex=3 class="PalletElement">3</button>
+            <button tabIndex=4 class="PalletElement">4</button>
+            <button tabIndex=5 class="PalletElement">5</button>
+            <button tabIndex=6 class="PalletElement">6</button>
+            <button tabIndex=7 class="PalletElement">7</button>
+            <button tabIndex=8 class="PalletElement">8-12</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <label class="OutputLabel">Price: </label>
+    <div class="OutputArea">
+      <label id="Price" class="Output"> </label>
+    </div>
+    
+    <!-- </div> -->
+  <!-- </div> -->
+</div>
+<!-- </form> -->
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+var destinationCityIndex = 0;
+var pickupCityIndex = 0;
+var deliveryTypeIndex = 0;
+var numberOfPallets = 0;
+
+var data = {
+    action: 'is_user_logged_in'
+};
+
+function ListDropDownOptions(id) {
+    document.getElementById(id).classList.toggle("show");
+}
+
+const onPriceMatrixLoaded = (data) => {
+  var xLength = 0;
+  var yLength = 0;
+  for (var i = 0; i < data.feed.entry.length; i++) {
+    var location = data.feed.entry[i].title.$t;
+    var xCoordinate = SheetLocationToArrayLocationX(location);
+    var yCoordinate = SheetLocationToArrayLocationY(location);
+    if (xLength < xCoordinate) {
+      xLength = xCoordinate
+    }
+    if (yLength < yCoordinate) {
+      yLength = yCoordinate;
+    }
+  }
+
+  xLength -= 1;
+  yLength -= 1;
+  prices = Array.apply(null, Array(yLength)).map(function () {}) 
+  for (var i = 0; i < yLength; i++) {
+    prices[i] = Array.apply(null, Array(xLength)).map(function () {}) 
+  }
+
+  for (var i = 0; i < data.feed.entry.length; i++) {
+    var location = data.feed.entry[i].title.$t;
+    var xCoordinate = SheetLocationToArrayLocationX(location);
+    var yCoordinate = SheetLocationToArrayLocationY(location);
+    if (xCoordinate != 1 && yCoordinate != 1) {
+      prices[yCoordinate-2][xCoordinate-2] = Number(data.feed.entry[i].content.$t);
+    }
+  }
+}
+
+function SheetLocationToArrayLocationX(sheetLocation) {
+  const numbers = '0123456789';
+  if ((numbers.indexOf(sheetLocation[1]) > -1)) {
+    return LetterToNumber(sheetLocation[0]);
+  } else {
+    return LetterToNumber(sheetLocation[0]) * 26 + LetterToNumber(sheetLocation[1]);
+  }
+}
+
+function SheetLocationToArrayLocationY(sheetLocation) {
+  const numbers = '0123456789';
+  var startingLocation = 1;
+  if (numbers.indexOf(sheetLocation[1]) == -1) {
+    startingLocation = 2;
+  }
+  var returnString = sheetLocation[startingLocation];
+  for (var i = startingLocation+1; i < sheetLocation.length; i++) {
+    returnString = returnString.concat(sheetLocation[i]);
+  }
+  return Number(returnString);
+}
+
+function LetterToNumber(letter) {
+  switch (letter) {
+    case 'A': return 1;
+    case 'B': return 2;
+    case 'C': return 3;
+    case 'D': return 4;
+    case 'E': return 5;
+    case 'F': return 6;
+    case 'G': return 7;
+    case 'H': return 8;
+    case 'I': return 9;
+    case 'J': return 10;
+    case 'K': return 11;
+    case 'L': return 12;
+    case 'M': return 13;
+    case 'N': return 14;
+    case 'O': return 15;
+    case 'P': return 16;
+    case 'Q': return 17;
+    case 'R': return 18;
+    case 'S': return 19;
+    case 'T': return 20;
+    case 'U': return 21;
+    case 'V': return 22;
+    case 'W': return 23;
+    case 'X': return 24;
+    case 'Y': return 25;
+    case 'Z': return 26;
+    default:
+      console.error("character " + letter + " is not on list of valid characters.");
+      break;
+  }
+}
+
+const onRateMatrixLoaded = (data) => {
+  // console.log(data);
+  var xLength = 0;
+  var yLength = 0;
+  for (var i = 0; i < data.feed.entry.length; i++) {
+    var location = data.feed.entry[i].title.$t;
+    var xCoordinate = SheetLocationToArrayLocationX(location);
+    var yCoordinate = SheetLocationToArrayLocationY(location);
+    if (xLength < xCoordinate) {
+      xLength = xCoordinate
+    }
+    if (yLength < yCoordinate) {
+      yLength = yCoordinate;
+    }
+  }
+
+  xLength -= 1;
+  yLength -= 1;
+  rateLevels = Array.apply(null, Array(yLength)).map(function () {}) 
+  for (var i = 0; i < yLength; i++) {
+    rateLevels[i] = Array.apply(null, Array(xLength)).map(function () {}) 
+  }
+  CityNames = Array.apply(null, Array(yLength)).map(function () {})
+
+  for (var i = 0; i < data.feed.entry.length; i++) {
+    var location = data.feed.entry[i].title.$t;
+    var xCoordinate = SheetLocationToArrayLocationX(location);
+    var yCoordinate = SheetLocationToArrayLocationY(location);
+    if (yCoordinate != 1) {
+      if (xCoordinate != 1 && yCoordinate != 1) {
+        rateLevels[yCoordinate-2][xCoordinate-2] = LetterToNumber(data.feed.entry[i].content.$t) - 1;
+      } else if (xCoordinate == 1) {
+        CityNames[yCoordinate-2] = data.feed.entry[i].content.$t;
+      }
+    }
+  }
+}
+
+const onZipcodeMatrixLoaded = (data) => {
+  // console.log(data);
+  var xLength = 0;
+  var yLength = 0;
+  for (var i = 0; i < data.feed.entry.length; i++) {
+    var location = data.feed.entry[i].title.$t;
+    var xCoordinate = SheetLocationToArrayLocationX(location);
+    var yCoordinate = SheetLocationToArrayLocationY(location);
+    if (xLength < xCoordinate) {
+      xLength = xCoordinate
+    }
+    if (yLength < yCoordinate) {
+      yLength = yCoordinate;
+    }
+  }
+
+  xLength -= 1;
+  yLength -= 1;
+  ZipCodes = Array.apply(null, Array(xLength)).map(function () {}) 
+  for (var i = 0; i < xLength; i++) {
+    ZipCodes[i] = Array.apply(null, Array(yLength)).map(function () {}) 
+  }
+
+  for (var i = 0; i < data.feed.entry.length; i++) {
+    var location = data.feed.entry[i].title.$t;
+    var xCoordinate = SheetLocationToArrayLocationX(location);
+    var yCoordinate = SheetLocationToArrayLocationY(location);
+    if (xCoordinate != 1 && yCoordinate != 1) {
+      ZipCodes[xCoordinate-2][yCoordinate-2] = parseInt(data.feed.entry[i].content.$t);
+    }
+  }
+}
+
+$(document).ready(function(){
+  //check if user is logged in and hide calculator if not
+  // var PriceCalculatorObject = document.getElementById("Price Calculator");
+  // jQuery.post(ajaxurl, data, function(response) {
+  //   if(response == 'yes') {
+  //       console.log("logged in");
+  //       PriceCalculatorObject.style.display = "block";
+  //   } else {
+  //       console.log("not logged in");
+  //       PriceCalculatorObject.style.display = "none";
+  //   }
+  // });
+
+  var DropDownList1 = document.getElementById('dropdowncontent1');
+  var DropDownList2 = document.getElementById('dropdowncontent2');
+  for (var i = 0; i < CityNames.length; i++) {
+    var newButton1 = document.createElement('button');
+    newButton1.classList.add('CityElement');
+    newButton1.tabIndex = i+1;
+    newButton1.content = CityNames[i];
+    newButton1.textContent = CityNames[i];
+    DropDownList1.appendChild(newButton1);
+
+    var newButton2 = document.createElement('button');
+    newButton2.classList.add('CityElement');
+    newButton2.tabIndex = i+1;
+    newButton2.content = CityNames[i];
+    newButton2.textContent = CityNames[i];
+    DropDownList2.appendChild(newButton2);
+  }
+
+  $("button").on('click touchend',function(e){
+    if(e.type == 'touchend'){
+        $(this).off('click');
+    }
+    if ($(this).hasClass('dropbtn')) {
+      var id = $(this).attr('id');
+      switch (id) {
+      case 'dropdown1':
+        ListDropDownOptions('dropdowncontent1');
+        break;
+      case 'dropdown2':
+        ListDropDownOptions('dropdowncontent2');
+        break;
+      case 'dropdown3':
+        ListDropDownOptions('dropdowncontent3');
+        break;
+      case 'dropdown4':
+        ListDropDownOptions('dropdowncontent4');
+        break;
+      }
+    } else {
+      switch($(this).parent().attr('id')) {
+      case "dropdowncontent1":
+        // ClearZipCodeInput('zipcode1');
+        SelectDropDownElement($(this).attr('tabIndex'), "dropdown1");
+        break;
+      case "dropdowncontent2":
+        // ClearZipCodeInput('zipcode2');
+        SelectDropDownElement($(this).attr('tabIndex'), "dropdown2");
+        break;
+      case "dropdowncontent3":
+        SelectDropDownElement($(this).attr('tabIndex'), "dropdown3");
+        break;
+      case "dropdowncontent4":
+        SelectDropDownElement($(this).attr('tabIndex'), "dropdown4");
+        break;
+      }
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  });
+});
+
+function LogString(debugString) {
+  var price = document.getElementById("Price");
+  price.textContent = debugString;
+}
+
+function ClearZipCodeInput(zipcodeID) {
+  var zipcodeInput = document.getElementById(zipcodeID);
+  zipcodeInput.value = '';
+  var zipcodeLabel = document.getElementById(zipcodeID.concat("label"))
+  zipcodeLabel.textContent = '';
+}
+
+function SelectDropDownElement(index, id) {
+  // <?php if (is_user_logged_in()): ?>
+  // alert('You are logged in');
+  // <?php else: ?>
+  // <?php endif; ?>
+  var dropdownlist;
+  if (id == "dropdown1" || id == "dropdown2") {
+    dropdownlist = ".CityElement";
+  } else if (id == "dropdown3") {
+    dropdownlist = ".DeliveryElement";
+  } else {
+    dropdownlist = ".PalletElement";
+  }
+  var dropdowns = $(dropdownlist).toArray();
+  var dropdownbutton = document.getElementById(id);
+  dropdownbutton.textContent = dropdowns[index].textContent;
+  if (id == "dropdown1") {
+    pickupCityIndex = index;
+  } else if (id == "dropdown2") {
+    destinationCityIndex = index;
+  } else if (id == "dropdown3") {
+    deliveryTypeIndex = index;
+  } else {
+    numberOfPallets = index;
+  }
+  UpdatePrice();
+}
+
+function ZipToCityIndex(zipcode) {
+  var NumberOfCities = ZipCodes.length;
+  for (var i = 0; i<NumberOfCities; i++) {
+    var cityZipCodes = ZipCodes[i];
+    for (var j = cityZipCodes.length-1; j>=0; j--) {
+      if (cityZipCodes[j] == zipcode) {
+        console.log(i);
+        return i+1;
+      }
+    }
+  }
+  return 0;
+}
+
+function UpdateCityFromZipCode(zipcodeInputElement, cityInputID) {
+  var zipcode = zipcodeInputElement.value;
+  var zipcodeLabel = document.getElementById(zipcodeInputElement.id.concat("label"))
+
+  if (zipcode.length == 0) {
+    zipcodeLabel.textContent = "";
+    return;
+  }
+
+  if (zipcode.length < 5) {
+    zipcodeLabel.style.color = "grey";
+    zipcodeLabel.textContent = "too short";
+    SelectDropDownElement(0, cityInputID);
+    return;
+  }
+
+  if (zipcode.length == 5) {
+    var index = ZipToCityIndex(parseInt(zipcode));
+    if (index != 0) {
+      SelectDropDownElement(index, cityInputID);
+      zipcodeLabel.textContent = "found";
+      zipcodeLabel.style.color = "green";
+    } else {
+      zipcodeLabel.textContent = "not found";
+      zipcodeLabel.style.color = "red";
+      SelectDropDownElement(0, cityInputID);
+    }
+    return;
+  }
+
+  zipcodeLabel.style.color = "grey";
+  zipcodeLabel.textContent = "too long";
+  SelectDropDownElement(0, cityInputID);
+  return;
+}
+
+function UpdatePrice() {
+  var price = document.getElementById("Price");
+  price.textContent = CalculatePrice();
+}
+
+var CityNames;
+var ZipCodes;
+var rateLevels;
+var prices;
+
+function CalculatePrice () {
+  if (deliveryTypeIndex == 0 || destinationCityIndex == 0 || pickupCityIndex == 0 || numberOfPallets == 0) {
+    return "";
+  }
+  // const rateLevels = [[0,0,4,1,0,4,1,1,4,0,3,4,1,0,4,2,1,4,3,5,3,1,2,0,2,3,3,5,2,2,2,3,3,2,3,1,1,1,2,1,2,5,1,3,1,2,4,2,2,2,2,4,4,1,1,3,2,2,2,3],
+  //                     [3,3,2,1,2,2,2,2,2,3,3,3,2,2,1,2,3,1,2,2,2,2,2,3,3,2,0,3,2,1,3,0,1,1,3,1,1,3,0,3,2,3,3,1,2,3,1,1,1,2,0,2,3,1,2,1,1,2,0,0]];
+
+  // const prices = [[ 33,  38,  43,  48,  54,  59,  64,  69], 
+  //                 [115, 120, 125, 130, 135, 140, 145, 150]];
+
+  var rateLevel = rateLevels[pickupCityIndex-1][destinationCityIndex-1];
+  var typeofSerice = (deliveryTypeIndex-1) * 6 + rateLevel
+  return "$" + prices[typeofSerice][numberOfPallets-1] + ".00";
+}
+</script>
+<script src="https://spreadsheets.google.com/feeds/cells/1gpAhGXiVh-bTn0lm6F0gItGzneC_6IJY9kqgVuYuSiQ/1/public/basic?alt=json-in-script&callback=onPriceMatrixLoaded"></script>
+<script src="https://spreadsheets.google.com/feeds/cells/1gpAhGXiVh-bTn0lm6F0gItGzneC_6IJY9kqgVuYuSiQ/2/public/basic?alt=json-in-script&callback=onRateMatrixLoaded"></script>
+<script src="https://spreadsheets.google.com/feeds/cells/1gpAhGXiVh-bTn0lm6F0gItGzneC_6IJY9kqgVuYuSiQ/3/public/basic?alt=json-in-script&callback=onZipcodeMatrixLoaded"></script>
