@@ -82,8 +82,8 @@ button:hover {
 }
 
 .Output {
-  font-size:200%;
-  line-height: 5%;
+  font-size:180%;
+  /* line-height: -0.1%; */
 }
 
 .OutputArea {
@@ -91,20 +91,19 @@ button:hover {
   border-style:inset;
   border-color: rgb(204, 204, 204);
   background-color:rgb(214, 214, 214);
-  border-width:thick;
+  border-width:medium;
   text-align: center;
-  align-items: center;
   overflow: hidden;
-  width: 7%;
-  height: 3%;
+  width: 120px;
+  height: 4%;
 }
 
 .OutputLabel {
   display: inline-block;
-  font-size:200%;
-  padding: 30px 5px;
-  height: 100px;
+  font-size:150%;
+  padding: 5px 5px;
   text-align:center;
+  overflow:hidden;
 }
 
 /* .InputSection text {
@@ -126,6 +125,7 @@ button:hover {
       <div class="dropdown">
         <button class="dropbtn" id="dropdown1">Select</button>
         <div id="dropdowncontent1" class="dropdown-content">
+          <input type="text" placeholder="Search.." id="searchInput1" onkeyup="filterSelection('searchInput1', 'dropdowncontent1')">
           <button tabIndex=0 class="CityElement">Select</button>
           
 
@@ -149,6 +149,7 @@ button:hover {
       <div class="dropdown">
         <button class="dropbtn" id="dropdown2">Select</button>
         <div id="dropdowncontent2" class="dropdown-content">
+          <input type="text" placeholder="Search.." id="searchInput2" onkeyup="filterSelection('searchInput2', 'dropdowncontent2')">
           <button tabIndex=0 class="CityElement">Select</button>
           
           
@@ -207,7 +208,7 @@ button:hover {
 
     <label class="OutputLabel">Price: </label>
     <div class="OutputArea">
-      <label id="Price" class="Output"> &nbsp</label>
+      <label id="Price" class="Output"> </label>
     </div>
     
     <!-- </div> -->
@@ -226,6 +227,25 @@ var numberOfPallets = 0;
 var data = {
     action: 'is_user_logged_in'
 };
+
+function filterSelection(inputID, dropDownID) {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById(inputID);
+  filter = input.value.toUpperCase();
+  div = document.getElementById(dropDownID);
+  a = div.getElementsByClassName("CityElement");
+  for (i = 0; i < a.length; i++) {
+    if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+      if (filter != "" && a[i].textContent == "Select") {
+        a[i].style.display = "none";
+      } else {
+        a[i].style.display = "";
+      }
+    } else {
+      a[i].style.display = "none";
+    }
+  }
+}
 
 function ListDropDownOptions(id) {
     document.getElementById(id).classList.toggle("show");
@@ -572,7 +592,7 @@ var prices;
 
 function CalculatePrice () {
   if (deliveryTypeIndex == 0 || destinationCityIndex == 0 || pickupCityIndex == 0 || numberOfPallets == 0) {
-    return " ";
+    return "";
   }
   // const rateLevels = [[0,0,4,1,0,4,1,1,4,0,3,4,1,0,4,2,1,4,3,5,3,1,2,0,2,3,3,5,2,2,2,3,3,2,3,1,1,1,2,1,2,5,1,3,1,2,4,2,2,2,2,4,4,1,1,3,2,2,2,3],
   //                     [3,3,2,1,2,2,2,2,2,3,3,3,2,2,1,2,3,1,2,2,2,2,2,3,3,2,0,3,2,1,3,0,1,1,3,1,1,3,0,3,2,3,3,1,2,3,1,1,1,2,0,2,3,1,2,1,1,2,0,0]];
