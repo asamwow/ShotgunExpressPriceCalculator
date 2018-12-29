@@ -558,7 +558,28 @@ button:hover {
      //                 [115, 120, 125, 130, 135, 140, 145, 150]];
 
      var rateLevel = rateLevels[pickupCityIndex-1][destinationCityIndex-1];
-     zoneElement.textContent = rateLevel;
+     var zone = '';
+     switch(rateLevel) {
+         case 0:
+             zone = 'A';
+             break;
+         case 1:
+             zone = 'B';
+             break;
+         case 2:
+             zone = 'C';
+             break;
+         case 3:
+             zone = 'D';
+             break;
+         case 4:
+             zone = 'E';
+             break;
+         case 5:
+             zone = 'F';
+             break;
+     }
+     zoneElement.textContent = zone;
      if (numberOfPallets == 0 || deliveryTypeIndex == 0) {
          priceElement.textContent = '';
          return;
