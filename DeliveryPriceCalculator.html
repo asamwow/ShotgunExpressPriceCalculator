@@ -18,7 +18,7 @@ button:hover {
 .dropdown-content {
     display: none;
     position: absolute;
-    left: 100px;
+    left: 242px;
     background-color: #a8a8a8;
     color: white;
     border: none;
@@ -387,7 +387,20 @@ button:hover {
              $(this).off('click');
          }
          if ($(this).hasClass('dropbtn')) {
+             // Clear Previous, other Drop Downs
              var id = $(this).attr('id');
+             var dropdowns = document.getElementsByClassName("dropdown-content");
+             var i;
+             for (i = 0; i < dropdowns.length; i++) {
+                 if (id[8] == dropdowns[i].id[15]) {
+                     continue;
+                 }
+                 var openDropdown = dropdowns[i];
+                 if (openDropdown.classList.contains('show')) {
+                     openDropdown.classList.remove('show');
+                 }
+             }
+             // Toggle Drop down list
              switch (id) {
                  case 'dropdown1':
                      ListDropDownOptions('dropdowncontent1');
