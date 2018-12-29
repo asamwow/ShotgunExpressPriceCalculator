@@ -474,10 +474,18 @@ button:hover {
      dropdownbutton.textContent = dropdowns[index].textContent;
      if (id == "dropdown1") {
          pickupCityIndex = index;
-         SetPickup(dropdowns[index].textContent)
+         if (index != 0) {
+             SetPickup(dropdowns[index].textContent);
+         } else {
+             SetPickup('');
+         }
      } else if (id == "dropdown2") {
          destinationCityIndex = index;
-         SetDestination(dropdowns[index].textContent)
+         if (index != 0) {
+             SetDestination(dropdowns[index].textContent);
+         } else {
+             SetDestination('');
+         }
      } else if (id == "dropdown3") {
          deliveryTypeIndex = index;
      } else {
